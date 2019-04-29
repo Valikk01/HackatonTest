@@ -30,7 +30,7 @@ class DBHelp(var context: Context?) :
         onCreate(db!!)
     }
 
-    fun addHabits(habit: Habits): Boolean{
+    fun addHabits(habit: Habits): Boolean{                  //записує в базу данних
         val db = this.writableDatabase
         val values = ContentValues()
         values.put(KEY_NAME_HABIT, habit.Name_of_habits)
@@ -45,7 +45,7 @@ class DBHelp(var context: Context?) :
         return (Integer.parseInt("$_success") != -1)
     }
 
-    fun getAllHabits():  MutableList<Habits>{
+    fun getAllHabits():  MutableList<Habits>{               //показує шо знаходиться в базі данних
         var list : MutableList<Habits> = ArrayList()
         val db = this.readableDatabase
         val query = "Select * from " + TABLE_CONSTANT

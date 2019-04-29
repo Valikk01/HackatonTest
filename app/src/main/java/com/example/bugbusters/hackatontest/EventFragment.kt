@@ -40,17 +40,6 @@ class EventFragment : Fragment() {
             mParam2 = arguments!!.getString(ARG_PARAM2)
         }
 
-
-//        button_save_and_exit.setOnClickListener(View.OnClickListener{
-//            if (editText_habit.text.toString().length>0){
-//                var habit = Habits(editText_habit.text.toString(),editText_add.text.toString())
-//                var db = DBHelp(context)
-//                db.addHabits(habit)
-//            }else{
-//                Toast.makeText(context,"Enter the name of habit",Toast.LENGTH_SHORT).show()
-//            }
-//        })
-
     }
 
 
