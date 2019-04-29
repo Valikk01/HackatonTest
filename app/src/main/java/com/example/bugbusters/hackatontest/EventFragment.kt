@@ -15,7 +15,6 @@ import kotlinx.android.synthetic.main.fragment_event.*
 
 
 
-
 /**
  * A simple [Fragment] subclass.
  * Activities that contain this fragment must implement the
@@ -32,6 +31,8 @@ class EventFragment : Fragment() {
 
     private var mListener: OnFragmentInteractionListener? = null
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (arguments != null) {
@@ -41,9 +42,6 @@ class EventFragment : Fragment() {
 
     }
 
-
-
-    }
 
 
     override fun onCreateView(
@@ -81,10 +79,6 @@ class EventFragment : Fragment() {
         })
 
         return view
-
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_event, container, false)
-
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -99,11 +93,7 @@ class EventFragment : Fragment() {
         if (context is OnFragmentInteractionListener) {
             mListener = context
         } else {
-
             throw RuntimeException(context!!.toString() + " must implement OnFragmentInteractionListener") as Throwable
-
-            throw RuntimeException(context!!.toString() + " must implement OnFragmentInteractionListener")
-
         }
     }
 
@@ -111,6 +101,7 @@ class EventFragment : Fragment() {
         super.onDetach()
         mListener = null
     }
+
 
 
     /**
