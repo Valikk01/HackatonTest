@@ -4,4 +4,12 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="name_of_habit">Name of habit</string>
+    <string name="add_info">Additional information</string>
+    <string name="radio_good">Good habit</string>
+    <string name="radio_bad">Bad habit</string>
+    <string name="radio_neutral">Neutral habit</string>
+    <string name="button_save_and_create_new">Save/create new</string>
+    <string name="button_save_and_exit">Save/exit</string>
+
 </resources>
