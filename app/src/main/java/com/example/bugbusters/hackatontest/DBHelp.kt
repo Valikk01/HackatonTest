@@ -8,12 +8,12 @@ import android.util.Log
 import android.widget.Toast
 
 var DATABASE_VERSION = 1
- var DATABASE_NAME = "habitsDb"
- var TABLE_CONSTANT = "Habits"
+ val DATABASE_NAME = "habitsDb"
+ val TABLE_CONSTANT = "Habits"
 
- var KEY_ID = "_id"
- var KEY_NAME_HABIT = "Name"
- var KEY_ADD_INFO = "Info"
+ val KEY_ID = "_id"
+ val KEY_NAME_HABIT = "Name"
+ val KEY_ADD_INFO = "Info"
 
 class DBHelp(var context: Context?) :
     SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
@@ -21,12 +21,13 @@ class DBHelp(var context: Context?) :
 
 
     override fun onCreate(db: SQLiteDatabase?) {
-        db?.execSQL("Create table " + TABLE_CONSTANT + "(" + KEY_ID
-                + " integer primary key" + KEY_NAME_HABIT + " text," + KEY_ADD_INFO + " text" + ")")
+        db?.execSQL("CREATE TABLE $TABLE_CONSTANT " +
+                "($KEY_ID Integer PRIMARY KEY, $KEY_NAME_HABIT TEXT, $KEY_ADD_INFO TEXT)")
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
-        TODO("not implemented")
+        db?.execSQL("Drop table if exists $TABLE_CONSTANT")
+        onCreate(db!!)
     }
 
     fun addHabits(habit: Habits): Boolean{
@@ -44,25 +45,25 @@ class DBHelp(var context: Context?) :
         return (Integer.parseInt("$_success") != -1)
     }
 
-    fun getAllHabits(): String {
-        var allHabits: String = ""
-        val db = readableDatabase
-        val selectALLQuery = "SELECT * FROM $TABLE_CONSTANT"
-        val cursor = db.rawQuery(selectALLQuery, null)
-        if (cursor != null) {
-            if (cursor.moveToFirst()) {
-                do {
-                    var id = cursor.getString(cursor.getColumnIndex(KEY_ID))
-                    var nameOfHabit = cursor.getString(cursor.getColumnIndex(KEY_NAME_HABIT))
-                    var addInfo = cursor.getString(cursor.getColumnIndex(KEY_ADD_INFO))
+    fun getAllHabits():  MutableList<Habits>{
+        var list : MutableList<Habits> = ArrayList()
+        val db = this.readableDatabase
+        val query = "Select * from " + TABLE_CONSTANT
+        val result = db.rawQuery(query,null)
+        if (result.moveToFirst()){
+            do {
+                var habit = Habits()
+                habit.id = result.getString(result.getColumnIndex(KEY_ID)).toInt()
+                habit.Name_of_habits = result.getString(result.getColumnIndex(KEY_NAME_HABIT))
+                habit.Add_info = result.getString(result.getColumnIndex(KEY_ADD_INFO))
+                list.add(habit)
+            }while (result.moveToNext())
 
-                    allHabits = "$allHabits\n$id $nameOfHabit $addInfo"
-                } while (cursor.moveToNext())
-            }
         }
-        cursor.close()
+
+        result.close()
         db.close()
-        return allHabits
+        return list
     }
 
 }

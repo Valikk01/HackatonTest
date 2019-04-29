@@ -22,12 +22,20 @@ class MainPage : AppCompatActivity(),EventFragment.OnFragmentInteractionListener
 
 
 
+
+
     lateinit var newEvent : EventFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_page)
         setSupportActionBar(toolbar)
+
+        var btnsave = findViewById<Button>(R.id.button_save_and_exit)
+        var btnshow = findViewById<Button>(R.id.button_save_and_create_new)
+        var text_hab = findViewById<EditText>(R.id.editText_habit)
+        var text_inf = findViewById<EditText>(R.id.editText_add)
+        var text_view = findViewById<TextView>(R.id.textView3)
 
         newEvent = EventFragment.newInstance()
 
@@ -40,6 +48,17 @@ class MainPage : AppCompatActivity(),EventFragment.OnFragmentInteractionListener
                 .commit()
         }
 
+//        var context = this
+//
+//        btnshow.setOnClickListener(View.OnClickListener{
+//            if (text_hab.toString().length>0){
+//                var habit = Habits(text_hab.toString(),text_inf.toString())
+//                var db = DBHelp(context)
+//                db.addHabits(habit)
+//            }else{
+//                Toast.makeText(context,"Enter the name of habit",Toast.LENGTH_SHORT).show()
+//            }
+//        })
 
 
 

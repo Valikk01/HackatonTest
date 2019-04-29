@@ -9,4 +9,6 @@ class Habits {
         this.Name_of_habits = name
         this.Add_info = info
     }
+    constructor(){
+    }
 }

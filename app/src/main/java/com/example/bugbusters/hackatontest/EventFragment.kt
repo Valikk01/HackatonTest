@@ -7,6 +7,9 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_event.*
 
@@ -38,15 +41,15 @@ class EventFragment : Fragment() {
         }
 
 
-        button_save_and_exit.setOnClickListener{
-            if (editText_habit.text.toString().length>0){
-                var habit = Habits(editText_habit.text.toString(),editText_add.text.toString())
-                var db = DBHelp(context)
-                db.addHabits(habit)
-            }else{
-                Toast.makeText(context,"Enter the name of habit",Toast.LENGTH_SHORT).show()
-            }
-        }
+//        button_save_and_exit.setOnClickListener(View.OnClickListener{
+//            if (editText_habit.text.toString().length>0){
+//                var habit = Habits(editText_habit.text.toString(),editText_add.text.toString())
+//                var db = DBHelp(context)
+//                db.addHabits(habit)
+//            }else{
+//                Toast.makeText(context,"Enter the name of habit",Toast.LENGTH_SHORT).show()
+//            }
+//        })
 
     }
 
@@ -56,8 +59,37 @@ class EventFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_event, container, false)
+
+        val view: View = inflater.inflate(R.layout.fragment_event, container,
+            false)
+        var btnsave = view.findViewById<Button>(R.id.button_save_and_exit)
+        var text_hab = view.findViewById<EditText>(R.id.editText_habit)
+        var text_inf = view.findViewById<EditText>(R.id.editText_add)
+        var btnshow = view.findViewById<Button>(R.id.button_save_and_create_new)
+        var text_view = view.findViewById<TextView>(R.id.textView3)
+
+        var db = DBHelp(context)
+
+        btnsave.setOnClickListener(View.OnClickListener{
+            if (text_hab.text.toString().length>0){
+                var habit = Habits(text_hab.text.toString(),text_inf.text.toString())
+
+                db.addHabits(habit)
+            }else{
+                Toast.makeText(context,"Enter the name of habit",Toast.LENGTH_SHORT).show()
+            }
+        })
+
+        btnshow.setOnClickListener(View.OnClickListener {
+            var data = db.getAllHabits()
+            text_view.text = ""
+            for (i in 0..(data.size - 1)){
+                text_view.append(data.get(i).id.toString() + " " + data.get(i).Name_of_habits
+                        + " " + data.get(i).Add_info + "\n")
+            }
+        })
+
+        return view
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -72,7 +104,7 @@ class EventFragment : Fragment() {
         if (context is OnFragmentInteractionListener) {
             mListener = context
         } else {
-            throw RuntimeException(context!!.toString() + " must implement OnFragmentInteractionListener")
+            throw RuntimeException(context!!.toString() + " must implement OnFragmentInteractionListener") as Throwable
         }
     }
 
