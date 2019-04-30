@@ -21,6 +21,7 @@ class DBHelp(var context: Context?) :
 
 
 
+
     override fun onCreate(db: SQLiteDatabase?) {
         db?.execSQL("CREATE TABLE $TABLE_CONSTANT " +
                 "($KEY_ID Integer PRIMARY KEY, $KEY_NAME_HABIT TEXT, $KEY_ADD_INFO TEXT, $KEY_MOOD INT)")
@@ -68,5 +69,9 @@ class DBHelp(var context: Context?) :
         db.close()
         return list
     }
+
+
+
+
 
 }
