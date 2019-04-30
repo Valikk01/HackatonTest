@@ -14,6 +14,7 @@ var DATABASE_VERSION = 1
  val KEY_ID = "_id"
  val KEY_NAME_HABIT = "Name"
  val KEY_ADD_INFO = "Info"
+ val KEY_MOOD = "Mood"
 
 class DBHelp(var context: Context?) :
     SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
@@ -22,7 +23,7 @@ class DBHelp(var context: Context?) :
 
     override fun onCreate(db: SQLiteDatabase?) {
         db?.execSQL("CREATE TABLE $TABLE_CONSTANT " +
-                "($KEY_ID Integer PRIMARY KEY, $KEY_NAME_HABIT TEXT, $KEY_ADD_INFO TEXT)")
+                "($KEY_ID Integer PRIMARY KEY, $KEY_NAME_HABIT TEXT, $KEY_ADD_INFO TEXT, $KEY_MOOD INT)")
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
@@ -35,6 +36,7 @@ class DBHelp(var context: Context?) :
         val values = ContentValues()
         values.put(KEY_NAME_HABIT, habit.Name_of_habits)
         values.put(KEY_ADD_INFO, habit.Add_info)
+        values.put(KEY_MOOD, habit.Mood)
         val _success = db.insert(TABLE_CONSTANT, null, values)
         if (_success == -1.toLong())
             Toast.makeText(context,"Failed",Toast.LENGTH_SHORT).show()
@@ -56,6 +58,7 @@ class DBHelp(var context: Context?) :
                 habit.id = result.getString(result.getColumnIndex(KEY_ID)).toInt()
                 habit.Name_of_habits = result.getString(result.getColumnIndex(KEY_NAME_HABIT))
                 habit.Add_info = result.getString(result.getColumnIndex(KEY_ADD_INFO))
+                habit.Mood = result.getString(result.getColumnIndex(KEY_MOOD))
                 list.add(habit)
             }while (result.moveToNext())
 

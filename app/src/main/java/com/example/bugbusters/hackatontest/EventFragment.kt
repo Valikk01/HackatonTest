@@ -1,18 +1,17 @@
 package com.example.bugbusters.hackatontest
 
 import android.content.Context
+import android.graphics.drawable.VectorDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
+import android.widget.*
 import android.widget.Toast
-import kotlinx.android.synthetic.main.fragment_event.*
-
+import android.widget.RadioGroup
+import java.util.*
 
 
 /**
@@ -56,25 +55,36 @@ class EventFragment : Fragment() {
         var text_inf = view.findViewById<EditText>(R.id.editText_add)
         var btnshow = view.findViewById<Button>(R.id.button_save_and_create_new)
         var text_view = view.findViewById<TextView>(R.id.textView3)
+        var radiomood = view.findViewById<RadioGroup>(R.id.radioMood)
+
 
         var db = DBHelp(context)
 
         btnsave.setOnClickListener(View.OnClickListener{
-            if (text_hab.text.toString().length>0){
-                var habit = Habits(text_hab.text.toString(),text_inf.text.toString())
 
+            val checked = radiomood.checkedRadioButtonId
+
+            if (text_hab.text.toString().length>0 && checked>-1){
+                var habit = Habits(text_hab.text.toString(),text_inf.text.toString(),checked )
                 db.addHabits(habit)
+
             }else{
-                Toast.makeText(context,"Enter the name of habit",Toast.LENGTH_SHORT).show()
+                Toast.makeText(context,"Enter the name of habit and mood",Toast.LENGTH_SHORT).show()
             }
+
+
+
         })
 
         btnshow.setOnClickListener(View.OnClickListener {
             var data = db.getAllHabits()
             text_view.text = ""
             for (i in 0..(data.size - 1)){
-                text_view.append(data.get(i).id.toString() + " " + data.get(i).Name_of_habits
-                        + " " + data.get(i).Add_info + "\n")
+
+                        text_view.append(
+                            data.get(i).id.toString() + ") " + data.get(i).Name_of_habits
+                                    + " " + data.get(i).Add_info + " " + data.get(i).Mood + "\n")
+
             }
         })
 
