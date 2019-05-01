@@ -3,7 +3,7 @@
              xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
-             tools:context=".EventFragment">
+             tools:context=".EventFragment" android:background="#00706C6C">
     <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -12,12 +12,97 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName"
-                android:text="Name"
                 android:ems="10"
-                android:id="@+id/editText2" android:layout_marginTop="8dp"
+                android:id="@+id/editText_habit" android:layout_marginTop="8dp"
                 app:layout_constraintTop_toTopOf="parent" android:layout_marginBottom="8dp"
                 app:layout_constraintBottom_toBottomOf="parent" android:layout_marginEnd="8dp"
                 app:layout_constraintEnd_toEndOf="parent" android:layout_marginStart="8dp"
-                app:layout_constraintStart_toStartOf="parent" app:layout_constraintVertical_bias="0.165"/>
+                app:layout_constraintStart_toStartOf="parent" app:layout_constraintVertical_bias="0.086"
+                android:hint="@string/name_of_habit"
+                app:layout_constraintHorizontal_bias="0.494"/>
+        <EditText
+                android:layout_width="310dp"
+                android:layout_height="wrap_content"
+                android:inputType="textMultiLine"
+                android:gravity="start|top"
+                android:ems="10"
+                android:id="@+id/editText_add" android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toEndOf="parent" android:layout_marginStart="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:hint="@string/add_info" android:background="#F8FFFFFF"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@+id/editText_habit" app:layout_constraintVertical_bias="0.017"
+                android:minLines="2"
+                android:maxLines="4"/>
+        <RadioGroup
+                android:layout_width="0dp"
+                android:layout_height="65dp"
+                app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
+                app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/editText_add"
+                app:layout_constraintVertical_bias="0.017"
+                android:orientation="horizontal" android:id="@+id/radioMood">
+            <RadioButton
+                    android:text="@string/radio_good"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:theme="@style/good_habit"
+                    android:button="@drawable/radiobutton_selector_good"
+                    android:id="@+id/radio_good" android:layout_marginTop="16dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp" android:layout_marginBottom="8dp"
+            />
+            <RadioButton
+                    android:text="@string/radio_neutral"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:theme="@style/neutral_habit"
+                    android:button="@drawable/radiobutton_selector_neutral"
+                    android:id="@+id/radio_neutral" android:layout_marginTop="16dp"
+                    android:layout_marginEnd="8dp" android:layout_marginBottom="8dp"
+            />
+            <RadioButton
+                    android:text="@string/radio_bad"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:theme="@style/bad_habit"
+                    android:button="@drawable/radiobutton_selector_bad"
+                    android:id="@+id/radio_bad" android:layout_marginTop="16dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp" android:layout_marginBottom="8dp"
+            />
+        </RadioGroup>
+        <Button
+                android:text="@string/button_save_and_exit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/button_save_and_exit" app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="8dp" android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent" android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@+id/radioMood" app:layout_constraintEnd_toStartOf="@+id/button_save_and_create_new"
+                android:layout_marginEnd="8dp" app:layout_constraintHorizontal_bias="0.27"/>
+        <Button
+                android:text="@string/button_save_and_create_new"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/button_save_and_create_new" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/radioMood"
+                app:layout_constraintStart_toEndOf="@+id/button_save_and_exit" android:layout_marginStart="8dp"/>
+        <TextView
+                android:layout_width="348dp"
+                android:layout_height="154dp"
+                android:id="@+id/textView3" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+                app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/radioMood"
+                android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintVertical_bias="0.058"/>
     </android.support.constraint.ConstraintLayout>
 </FrameLayout>
