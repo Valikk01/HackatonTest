@@ -34,6 +34,7 @@ class MainPage : AppCompatActivity(),EventFragment.OnFragmentInteractionListener
 
     private var db: DBHelp? = null
 
+
     lateinit var newEvent : EventFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
