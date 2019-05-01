@@ -5,6 +5,7 @@ import android.graphics.drawable.VectorDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,9 +30,10 @@ class EventFragment : Fragment() {
     private var mParam2: String? = null
 
     private var mListener: OnFragmentInteractionListener? = null
-
-
-
+    private var recyclerView: RecyclerView? = null
+    private var mAdapter: HabitsAdapter? = null
+    private val habitsList = ArrayList<Habits>()
+    private var db: DBHelp? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (arguments != null) {
@@ -57,7 +59,6 @@ class EventFragment : Fragment() {
         var text_view = view.findViewById<TextView>(R.id.textView3)
         var radiomood = view.findViewById<RadioGroup>(R.id.radioMood)
 
-
         var db = DBHelp(context)
 
         btnsave.setOnClickListener(View.OnClickListener{
@@ -67,6 +68,7 @@ class EventFragment : Fragment() {
             if (text_hab.text.toString().length>0 && checked>-1){
                 var habit = Habits(text_hab.text.toString(),text_inf.text.toString(),checked )
                 db.addHabits(habit)
+               // db.updateNote()
 
             }else{
                 Toast.makeText(context,"Enter the name of habit and mood",Toast.LENGTH_SHORT).show()
@@ -90,6 +92,8 @@ class EventFragment : Fragment() {
 
         return view
     }
+
+
 
     // TODO: Rename method, update argument and hook method into UI event
     fun onButtonPressed(uri: Uri) {

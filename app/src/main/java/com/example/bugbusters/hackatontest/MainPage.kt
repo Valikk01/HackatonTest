@@ -20,6 +20,12 @@ import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main_page.*
 import kotlinx.android.synthetic.main.fragment_event.*
 import java.util.ArrayList
+import android.text.method.TextKeyListener.clear
+import android.provider.SyncStateContract.Helpers.update
+
+
+
+
 
 
 class MainPage : AppCompatActivity(),EventFragment.OnFragmentInteractionListener {
@@ -48,8 +54,7 @@ class MainPage : AppCompatActivity(),EventFragment.OnFragmentInteractionListener
         recyclerView = findViewById(R.id.recycler_view)
 
         db = DBHelp(this)
-        habitsList.addAll(db!!.getAllHabits())
-
+        habitsList.addAll(db!!.allNotes)
         fab.setOnClickListener {
             supportFragmentManager
                 .beginTransaction()
@@ -58,7 +63,6 @@ class MainPage : AppCompatActivity(),EventFragment.OnFragmentInteractionListener
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                 .commit()
         }
-
 
 
         mAdapter = HabitsAdapter(this, habitsList)
@@ -72,13 +76,6 @@ class MainPage : AppCompatActivity(),EventFragment.OnFragmentInteractionListener
 
 
     }
-
-
-
-
-
-
-
 
 
 

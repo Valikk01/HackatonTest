@@ -10,17 +10,17 @@ import android.widget.TextView
 import java.text.ParseException
 import java.text.SimpleDateFormat
 
-class HabitsAdapter (private val context: Context, private val notesList: List<Habits>) : RecyclerView.Adapter<HabitsAdapter.MyViewHolder>() {
+class HabitsAdapter (private val context: Context, private val habitsList: List<Habits>) : RecyclerView.Adapter<HabitsAdapter.MyViewHolder>() {
 
     inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         var habit: TextView
         var dot: TextView
-        var timestamp: TextView
+        var add_inf: TextView
 
         init {
             habit = view.findViewById(R.id.habit)
             dot = view.findViewById(R.id.dot)
-            timestamp = view.findViewById(R.id.timestamp)
+            add_inf = view.findViewById(R.id.add_inf)
         }
     }
 
@@ -31,37 +31,22 @@ class HabitsAdapter (private val context: Context, private val notesList: List<H
         return MyViewHolder(itemView)
     }
 
+
+
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val habit = notesList[position]
+        val habit = habitsList[position]
 
         holder.habit.text = habit.Name_of_habits
-
+        holder.add_inf.text = habit.Add_info
         // Displaying dot from HTML character code
         holder.dot.text = Html.fromHtml("&#8226;")
 
-        // Formatting and displaying timestamp
-        //holder.timestamp.text = formatDate(habit.timestamp)
+
     }
 
     override fun getItemCount(): Int {
-        return notesList.size
+        return habitsList.size
     }
 
-    /**
-     * Formatting timestamp to `MMM d` format
-     * Input: 2018-02-21 00:15:42
-     * Output: Feb 21
-     */
-    private fun formatDate(dateStr: String?): String {
-        try {
-            val fmt = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
-            val date = fmt.parse(dateStr)
-            val fmtOut = SimpleDateFormat("MMM d")
-            return fmtOut.format(date)
-        } catch (e: ParseException) {
 
-        }
-
-        return ""
-    }
 }
