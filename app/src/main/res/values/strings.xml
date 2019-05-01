@@ -11,5 +11,6 @@
     <string name="radio_neutral">Neutral habit</string>
     <string name="button_save_and_create_new">Save/create new</string>
     <string name="button_save_and_exit">Save/exit</string>
-
+    <string name="new_habit_title">New Habit</string>
+    <string name="edit_habit_title">Edit Habit</string>
 </resources>
